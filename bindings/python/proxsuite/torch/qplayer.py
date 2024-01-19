@@ -50,41 +50,41 @@ def QPFunction(
         Solve the QP problem.
 
         Args:
-            Q (torch.Tensor): Batch of quadratic cost matrices of size (nBatch, n, n) or (n, n).
-            p (torch.Tensor): Batch of linear cost vectors of size (nBatch, n) or (n).
-            A (torch.Tensor, optional): Batch of eq. constraint matrices of size (nBatch, p, n) or (p, n).
-            b (torch.Tensor, optional): Batch of eq. constraint vectors of size (nBatch, p) or (p).
-            G (torch.Tensor): Batch of ineq. constraint matrices of size (nBatch, m, n) or (m, n).
-            l (torch.Tensor): Batch of ineq. lower bound vectors of size (nBatch, m) or (m).
-            u (torch.Tensor): Batch of ineq. upper bound vectors of size (nBatch, m) or (m).
+            Q (torch.tensor): Batch of quadratic cost matrices of size (nBatch, n, n) or (n, n).
+            p (torch.tensor): Batch of linear cost vectors of size (nBatch, n) or (n).
+            A (torch.tensor, optional): Batch of eq. constraint matrices of size (nBatch, p, n) or (p, n).
+            b (torch.tensor, optional): Batch of eq. constraint vectors of size (nBatch, p) or (p).
+            G (torch.tensor): Batch of ineq. constraint matrices of size (nBatch, m, n) or (m, n).
+            l (torch.tensor): Batch of ineq. lower bound vectors of size (nBatch, m) or (m).
+            u (torch.tensor): Batch of ineq. upper bound vectors of size (nBatch, m) or (m).
 
         Returns:
-            zhats (torch.Tensor): Batch of optimal primal solutions of size (nBatch, n).
-            lams (torch.Tensor): Batch of dual variables for eq. constraint of size (nBatch, m).
-            nus (torch.Tensor): Batch of dual variables  for ineq. constraints of size (nBatch, p).
+            zhats (torch.tensor): Batch of optimal primal solutions of size (nBatch, n).
+            lams (torch.tensor): Batch of dual variables for eq. constraint of size (nBatch, m).
+            nus (torch.tensor): Batch of dual variables  for ineq. constraints of size (nBatch, p).
             Only for infeasible case:
-                s_e (torch.Tensor): Batch of slack variables for eq. constraints of size (nBatch, m).
-                s_i (torch.Tensor): Batch of slack variables for ineq. constraints of size (nBatch, p).
+                s_e (torch.tensor): Batch of slack variables for eq. constraints of size (nBatch, m).
+                s_i (torch.tensor): Batch of slack variables for ineq. constraints of size (nBatch, p).
 
     Backward:
         Compute the gradients of the QP problem wrt its parameters.
 
         Args:
-            dl_dzhat (torch.Tensor): Batch of gradients of size (nBatch, n).
-            dl_dlams (torch.Tensor, optional): Batch of gradients of size (nBatch, p).
-            dl_dnus (torch.Tensor, optional): Batch of gradients of size (nBatch, m).
+            dl_dzhat (torch.tensor): Batch of gradients of size (nBatch, n).
+            dl_dlams (torch.tensor, optional): Batch of gradients of size (nBatch, p).
+            dl_dnus (torch.tensor, optional): Batch of gradients of size (nBatch, m).
             Only for infeasible case:
-                dl_ds_e (torch.Tensor, optional): Batch of gradients of size (nBatch, m).
-                dl_ds_i (torch.Tensor, optional): Batch of gradients of size (nBatch, m).
+                dl_ds_e (torch.tensor, optional): Batch of gradients of size (nBatch, m).
+                dl_ds_i (torch.tensor, optional): Batch of gradients of size (nBatch, m).
 
         Returns:
-            dQs (torch.Tensor): Batch of gradients of size (nBatch, n, n).
-            dps (torch.Tensor): Batch of gradients of size (nBatch, n).
-            dAs (torch.Tensor): Batch of gradients of size (nBatch, p, n).
-            dbs (torch.Tensor): Batch of gradients of size (nBatch, p).
-            dGs (torch.Tensor): Batch of gradients of size (nBatch, m, n).
-            dls (torch.Tensor): Batch of gradients of size (nBatch, m).
-            dus (torch.Tensor): Batch of gradients of size (nBatch, m).
+            dQs (torch.tensor): Batch of gradients of size (nBatch, n, n).
+            dps (torch.tensor): Batch of gradients of size (nBatch, n).
+            dAs (torch.tensor): Batch of gradients of size (nBatch, p, n).
+            dbs (torch.tensor): Batch of gradients of size (nBatch, p).
+            dGs (torch.tensor): Batch of gradients of size (nBatch, m, n).
+            dls (torch.tensor): Batch of gradients of size (nBatch, m).
+            dus (torch.tensor): Batch of gradients of size (nBatch, m).
     """
     global proxqp_parallel
     proxqp_parallel = omp_parallel
